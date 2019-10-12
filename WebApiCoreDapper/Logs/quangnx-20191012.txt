@@ -1,0 +1,37 @@
+2019-10-12T16:39:16.5663992+07:00  [DBG] Failed to authenticate HTTPS connection. (64210341)
+System.IO.IOException: Authentication failed because the remote party has closed the transport stream.
+   at System.Net.Security.SslState.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
+   at System.Net.Security.SslState.PartialFrameCallback(AsyncProtocolRequest asyncRequest)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Net.Security.SslState.ThrowIfExceptional()
+   at System.Net.Security.SslState.InternalEndProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.SslState.EndProcessAuthentication(IAsyncResult result)
+   at System.Net.Security.SslStream.EndAuthenticateAsServer(IAsyncResult asyncResult)
+   at System.Net.Security.SslStream.<>c.<AuthenticateAsServerAsync>b__51_1(IAsyncResult iar)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncCoreLogic(IAsyncResult iar, Func`2 endFunction, Action`1 endAction, Task`1 promise, Boolean requiresSynchronization)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionAdapter.InnerOnConnectionAsync(ConnectionAdapterContext context)
+2019-10-12T16:39:16.5663992+07:00  [DBG] Failed to authenticate HTTPS connection. (64210341)
+System.IO.IOException: Authentication failed because the remote party has closed the transport stream.
+   at System.Net.Security.SslState.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
+   at System.Net.Security.SslState.PartialFrameCallback(AsyncProtocolRequest asyncRequest)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Net.Security.SslState.ThrowIfExceptional()
+   at System.Net.Security.SslState.InternalEndProcessAuthentication(LazyAsyncResult lazyResult)
+   at System.Net.Security.SslState.EndProcessAuthentication(IAsyncResult result)
+   at System.Net.Security.SslStream.EndAuthenticateAsServer(IAsyncResult asyncResult)
+   at System.Net.Security.SslStream.<>c.<AuthenticateAsServerAsync>b__51_1(IAsyncResult iar)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncCoreLogic(IAsyncResult iar, Func`2 endFunction, Action`1 endAction, Task`1 promise, Boolean requiresSynchronization)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionAdapter.InnerOnConnectionAsync(ConnectionAdapterContext context)
+2019-10-12T16:39:16.8481901+07:00 0HLQEV067SPHT:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/swagger/index.html   (ca22a1cb)
+2019-10-12T16:39:17.0079812+07:00 0HLQEV067SPHT:00000001 [INF] Request finished in 161.282ms 200 text/html (791a596a)
+2019-10-12T16:39:17.1819236+07:00 0HLQEV067SPHT:00000002 [INF] Request starting HTTP/1.1 GET https://localhost:5001/swagger/v1/swagger.json   (ca22a1cb)
+2019-10-12T16:39:17.4433452+07:00 0HLQEV067SPHT:00000002 [INF] Request finished in 260.8616ms 200 application/json;charset=utf-8 (791a596a)
+2019-10-12T16:39:20.0443425+07:00 0HLQEV067SPHT:00000003 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/Product   (ca22a1cb)
+2019-10-12T16:39:20.0978065+07:00 0HLQEV067SPHT:00000003 [INF] Route matched with "{action = \"Get\", controller = \"Product\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WebApiCoreDapper.Models.Product]] Get()" on controller "WebApiCoreDapper.Controllers.ProductController" ("WebApiCoreDapper"). (122b2fdf)
+2019-10-12T16:39:20.1102412+07:00 0HLQEV067SPHT:00000003 [INF] Executing action method "WebApiCoreDapper.Controllers.ProductController.Get (WebApiCoreDapper)" - Validation state: Valid (dad538d7)
+2019-10-12T16:39:22.9219425+07:00 0HLQEV067SPHT:00000003 [INF] Executed action method "WebApiCoreDapper.Controllers.ProductController.Get (WebApiCoreDapper)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2806.7284ms. (50a9e262)
+2019-10-12T16:39:22.9324145+07:00 0HLQEV067SPHT:00000003 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[WebApiCoreDapper.Models.Product, WebApiCoreDapper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-10-12T16:39:22.9446488+07:00 0HLQEV067SPHT:00000003 [INF] Executed action "WebApiCoreDapper.Controllers.ProductController.Get (WebApiCoreDapper)" in 2841.8443ms (afa2e885)
+2019-10-12T16:39:22.9503735+07:00 0HLQEV067SPHT:00000003 [INF] Request finished in 2905.9285ms 200 application/json; charset=utf-8 (791a596a)

@@ -39,8 +39,9 @@ namespace WebApiCoreDapper
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddFile(Configuration.GetSection("Logging"));
             //cấu hình cho phép domain nào được truy cập api này
             //khi thực thi chương trình nếu có lỗi nó sẽ bắt lỗi là lỗi gì tên gì
             //sau đó thì ta có thể ghi ra log

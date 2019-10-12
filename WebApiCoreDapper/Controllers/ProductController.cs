@@ -7,6 +7,7 @@ using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using WebApiCoreDapper.Dtos;
 using WebApiCoreDapper.Fillters;
 using WebApiCoreDapper.Models;
@@ -15,10 +16,11 @@ namespace WebApiCoreDapper.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : BaseController
     {
         private readonly string db;
-        public ProductController(IConfiguration configuration)
+        public ProductController(IConfiguration configuration, ILogger<ProductController> logger)
+            : base(logger)
         {
             db = configuration.GetConnectionString("DbConnectionString");
         }
@@ -26,7 +28,7 @@ namespace WebApiCoreDapper.Controllers
         [HttpGet(Name = "GetAll")]
         public async Task<IEnumerable<Product>> Get()
         {
-            throw new Exception("test");
+            this.logger.LogTrace("test log product controller");
             using (var conect=new SqlConnection(db))
             {
                 if(conect.State==System.Data.ConnectionState.Closed)
