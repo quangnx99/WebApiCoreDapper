@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using WebApiCoreDapper.Dtos;
+using WebApiCoreDapper.Fillters;
 using WebApiCoreDapper.Models;
 
 namespace WebApiCoreDapper.Controllers
@@ -22,9 +23,10 @@ namespace WebApiCoreDapper.Controllers
             db = configuration.GetConnectionString("DbConnectionString");
         }
         // GET: api/Product
-        [HttpGet]
+        [HttpGet(Name = "GetAll")]
         public async Task<IEnumerable<Product>> Get()
         {
+            throw new Exception("test");
             using (var conect=new SqlConnection(db))
             {
                 if(conect.State==System.Data.ConnectionState.Closed)
@@ -38,7 +40,7 @@ namespace WebApiCoreDapper.Controllers
         }
 
         // GET: api/Product/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetById")]
         public async Task<Product> Get(int id)
         {
             using (var conect = new SqlConnection(db))
@@ -55,8 +57,8 @@ namespace WebApiCoreDapper.Controllers
             }
         }
          // GET: api/Product/5
-        [HttpGet(Name = "GetPaging")]
-        public async Task<PagedResult> GetPaging(string keyword,int categoryId,int pageIndex,int pageSize)
+        [HttpGet("paging",Name = "GetPaging")]
+        public async Task<PagedResult<Product>> GetPaging(string keyword,int categoryId,int pageIndex,int pageSize)
         {
             using (var conect = new SqlConnection(db))
             {
@@ -72,7 +74,7 @@ namespace WebApiCoreDapper.Controllers
                 parameter.Add("@totalRow", dbType: System.Data.DbType.Int32, direction: System.Data.ParameterDirection.Output);
                 var result = await conect.QueryAsync<Product>("Get_Product_AllPaging",parameter,null, null, System.Data.CommandType.StoredProcedure);
                 var totalRow = parameter.Get<int>("totalRow");
-                var pagedResult = new PagedResult
+                var pagedResult = new PagedResult<Product>
                 {
                     Items = result.ToList(),
                     TotalRow = totalRow,
@@ -80,7 +82,6 @@ namespace WebApiCoreDapper.Controllers
                     PageSize = pageSize
                 };
                 return pagedResult;
-
             }
         }
 
@@ -88,6 +89,7 @@ namespace WebApiCoreDapper.Controllers
         [HttpPost]
         public async Task<int> Post([FromBody] Product product)
         {
+
             var newId = 0;
             using (var conect = new SqlConnection(db))
             {
@@ -111,7 +113,8 @@ namespace WebApiCoreDapper.Controllers
 
         // PUT: api/Product/5
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] Product product)
+        [ValidateModel]
+        public async Task<IActionResult> Put(int id, [FromBody] Product product)
         {
             using (var conect = new SqlConnection(db))
             {
@@ -126,6 +129,8 @@ namespace WebApiCoreDapper.Controllers
                 parameter.Add("@imageUrl", product.ImageUrl);
                 parameter.Add("@isActive", product.IsActive);
                 await conect.ExecuteAsync("Update_Product", parameter, null, null, System.Data.CommandType.StoredProcedure);
+                int newId = parameter.Get<int>("@id");
+                return Ok(newId);
             }
         }
 

@@ -6,9 +6,9 @@ using WebApiCoreDapper.Models;
 
 namespace WebApiCoreDapper.Dtos
 {
-    public class PagedResult
+    public class PagedResult<T> where T:class
     {
-        public List<Product> Items{ get; set; }
+        public List<T> Items{ get; set; }
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
         public int TotalRow { get; set; }
